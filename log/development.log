@@ -141,3 +141,72 @@ Started GET "/users" for 127.0.0.1 at 2017-09-24 23:23:28 +0700
 Processing by UsersController#index as HTML
   [1m[36mUser Load (0.8ms)[0m  [1mSELECT `users`.* FROM `users`[0m
 Completed 200 OK in 19ms (Views: 11.2ms | ActiveRecord: 3.7ms)
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreatePosts (20170925122546)
+  [1m[35m (283.5ms)[0m  CREATE TABLE `posts` (`id` int(11) auto_increment PRIMARY KEY, `description` text, `user_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20170925122546')
+  [1m[36m (39.3ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.4ms)[0m  SELECT `schema_migrations`.* FROM `schema_migrations`
+  [1m[36m (0.3ms)[0m  [1mSELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'crud_api'
+  AND fk.table_name = 'posts'
+[0m
+  [1m[35m (0.2ms)[0m  SHOW CREATE TABLE `posts`
+  [1m[36m (0.3ms)[0m  [1mSELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'crud_api'
+  AND fk.table_name = 'users'
+[0m
+  [1m[35m (0.2ms)[0m  SHOW CREATE TABLE `users`
+
+
+Started GET "/api/v1/users/request_token" for 127.0.0.1 at 2017-09-25 19:37:10 +0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by Api::V1::UsersController#request_token as HTML
+  [1m[35mUser Load (1.5ms)[0m  SELECT  `users`.* FROM `users` WHERE (email = NULL AND password = NULL)  ORDER BY `users`.`id` ASC LIMIT 1
+Completed 200 OK in 45ms (Views: 0.5ms | ActiveRecord: 4.1ms)
+
+
+Started GET "/api/v1/users/request_token?email=agus@mail.com&password=[FILTERED]" for 127.0.0.1 at 2017-09-25 19:38:30 +0700
+Processing by Api::V1::UsersController#request_token as HTML
+  Parameters: {"email"=>"agus@mail.com", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE (email = 'agus@mail.com' AND password = 'agus')  ORDER BY `users`.`id` ASC LIMIT 1[0m
+Completed 200 OK in 23ms (Views: 0.5ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/api/v1/posts" for 127.0.0.1 at 2017-09-25 19:40:22 +0700
+Processing by Api::V1::PostsController#index as HTML
+Filter chain halted as :verify_token rendered or redirected
+Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/v1/users/request_token" for 127.0.0.1 at 2017-09-25 19:40:49 +0700
+Processing by Api::V1::UsersController#request_token as HTML
+  [1m[35mUser Load (0.7ms)[0m  SELECT  `users`.* FROM `users` WHERE (email = NULL AND password = NULL)  ORDER BY `users`.`id` ASC LIMIT 1
+Completed 200 OK in 12ms (Views: 0.4ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/api/v1/posts?token=1&description=Building%20and%20Documenting%20REST%20api%20in%20Rails" for 127.0.0.1 at 2017-09-25 19:41:22 +0700
+Processing by Api::V1::PostsController#index as HTML
+  Parameters: {"token"=>"1", "description"=>"Building and Documenting REST api in Rails"}
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE (tokenid = '1')  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mPost Load (0.7ms)[0m  SELECT `posts`.* FROM `posts`
+Completed 200 OK in 31ms (Views: 3.1ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/api/v1/posts?token=1&description=Building%20and%20Documenting%20REST%20api%20in%20Rails" for 127.0.0.1 at 2017-09-25 19:42:31 +0700
+Processing by Api::V1::PostsController#index as HTML
+  Parameters: {"token"=>"1", "description"=>"Building and Documenting REST api in Rails"}
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE (tokenid = '1')  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mPost Load (1.2ms)[0m  SELECT `posts`.* FROM `posts`
+Completed 200 OK in 23ms (Views: 15.8ms | ActiveRecord: 2.8ms)
