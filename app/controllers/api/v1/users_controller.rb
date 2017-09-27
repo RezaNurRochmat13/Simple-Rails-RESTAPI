@@ -13,4 +13,15 @@ class Api::V1::UsersController < ApplicationController
 			render json: {error: 'Users not found'}
 		end
 	end
+
+	def create
+		@users = User.new(username: params[:username], password_digest: params[:password_digest], email: params[:email], phone_no: params[:phone_no])
+		if @users.save
+			@users.tokenid = SecureRandom.uuid
+			render json: @users
+		else
+			render json: {error: 'Process failed'}
+			
+		end
+	end
 end

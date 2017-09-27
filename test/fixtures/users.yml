@@ -3,13 +3,13 @@
 one:
   tokenid: MyString
   username: MyString
-  password: MyString
+  password_digest: MyString
   email: MyString
   phone_no: MyString
 
 two:
   tokenid: MyString
   username: MyString
-  password: MyString
+  password_digest: MyString
   email: MyString
   phone_no: MyString

@@ -6,7 +6,7 @@ class Api::V1::PostsController < ApplicationController
 	end
 
 	def create
-		@posts = Post.new(user_id: session[:user_id], description: params[:description])
+		@posts = Post.new(user_id: session[:user_id], description: params[:description], username: params[:username])
 		if @posts.save
 			render json: @posts
 		else
