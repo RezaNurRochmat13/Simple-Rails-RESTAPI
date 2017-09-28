@@ -6,7 +6,7 @@ class Api::V1::PostsController < ApplicationController
 	end
 
 	def create
-		@posts = Post.new(user_id: session[:user_id], description: params[:description], username: params[:username])
+		@posts = Post.new(user_id: session[:user_id], description: params[:description])
 		if @posts.save
 			render json: @posts
 		else
@@ -25,7 +25,8 @@ class Api::V1::PostsController < ApplicationController
 	end
 
 	def destroy
-		@posts = Post.where(id: params[:id], user_id: session[:user_id]).first
+		@posts = Post.where(id: params[:id], username: params[:username], password: params[:password], 
+			email: params[:email], phone_no: params[:phone_no]).first
 		if @posts.destroy
 			render json: {status: 'Successfully'}
 		else

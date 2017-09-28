@@ -15,13 +15,24 @@ class Api::V1::UsersController < ApplicationController
 	end
 
 	def create
-		@users = User.new(username: params[:username], password_digest: params[:password_digest], email: params[:email], phone_no: params[:phone_no])
+		@users = User.new(username: params[:username], password: params[:password], 
+			email: params[:email], phone_no: params[:phone_no],tokenid: session[:tokenid])
+		@users.tokenid = SecureRandom.uuid
 		if @users.save
-			@users.tokenid = SecureRandom.uuid
+			
 			render json: @users
 		else
 			render json: {error: 'Process failed'}
 			
+		end
+	end
+
+	def destroy
+		@posts = Post.where(id: params[:id]).first
+		if @posts.destroy
+			render json: {status: 'Successfully'}
+		else
+			render json: {error: 'Process failed'}
 		end
 	end
 end
