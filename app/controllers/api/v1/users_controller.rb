@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-
+	#before_filter :verify_token
 	def index
 		@users = User.all
 		render json: @users
@@ -28,8 +28,8 @@ class Api::V1::UsersController < ApplicationController
 	end
 
 	def destroy
-		@posts = Post.where(id: params[:id]).first
-		if @posts.destroy
+		@users = User.where(id: params[:id]).first
+		if @users.destroy
 			render json: {status: 'Successfully'}
 		else
 			render json: {error: 'Process failed'}
