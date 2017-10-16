@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-	#before_filter :verify_token
+	before_filter :verify_token
 	def index
 		@users = User.all
 		render json: @users

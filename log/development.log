@@ -3165,3 +3165,24 @@ Processing by Api::V1::UsersController#create as */*
   [1m[35mSQL (0.9ms)[0m  INSERT INTO `users` (`username`, `password_digest`, `email`, `phone_no`, `tokenid`, `created_at`, `updated_at`) VALUES ('evan', '$2a$10$ghdMfPSqd3QGMNQ00o1ZJ.lEtdYY2zMJxAPRgK9PMe1dK.jsBt3B2', 'aku@mail.com', '4321', '905c8ea3-c964-498d-b218-671446ffa4a6', '2017-10-02 13:29:32', '2017-10-02 13:29:32')
   [1m[36m (59.5ms)[0m  [1mCOMMIT[0m
 Completed 200 OK in 157ms (Views: 0.7ms | ActiveRecord: 60.7ms)
+
+
+Started GET "/api/v1/users" for 127.0.0.1 at 2017-10-05 18:59:45 +0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by Api::V1::UsersController#index as HTML
+  [1m[35mUser Load (0.8ms)[0m  SELECT `users`.* FROM `users`
+Completed 200 OK in 80ms (Views: 22.1ms | ActiveRecord: 5.9ms)
+
+
+Started GET "/api/v1/users" for 127.0.0.1 at 2017-10-05 19:00:00 +0700
+Processing by Api::V1::UsersController#index as HTML
+Filter chain halted as :verify_token rendered or redirected
+Completed 200 OK in 2ms (Views: 1.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/v1/users?token=5205f354-8c0a-45af-8c13-c74e9bf55d7b" for 127.0.0.1 at 2017-10-05 19:00:46 +0700
+Processing by Api::V1::UsersController#index as HTML
+  Parameters: {"token"=>"5205f354-8c0a-45af-8c13-c74e9bf55d7b"}
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE (tokenid = '5205f354-8c0a-45af-8c13-c74e9bf55d7b')  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mUser Load (0.7ms)[0m  SELECT `users`.* FROM `users`
+Completed 200 OK in 41ms (Views: 6.6ms | ActiveRecord: 5.3ms)
