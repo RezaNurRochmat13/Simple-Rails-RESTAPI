@@ -1,13 +1,15 @@
 source 'https://rubygems.org'
 
+ruby '3.2.1'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '7.0.3.1'
+gem 'rails', '7.1.3.3'
 
 # Puma webserver
 gem 'puma', '~> 5.2'
 # Use mysql as the database for Active Record
-gem 'mysql2', '~> 0.5.2'
+gem 'pg', '~> 1.5.6'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
