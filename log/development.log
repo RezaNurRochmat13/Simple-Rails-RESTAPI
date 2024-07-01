@@ -3354,3 +3354,7 @@ Processing by UsersController#index as HTML
 Completed 200 OK in 22ms (Views: 5.0ms | ActiveRecord: 3.3ms | Allocations: 11245)
 
 
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE DATABASE "blog_development" ENCODING = 'unicode'[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE DATABASE "blog_test" ENCODING = 'unicode'[0m
+  [1m[35m (79.5ms)[0m  [1m[35mCREATE DATABASE "todo_development" ENCODING = 'unicode'[0m
+  [1m[35m (26.9ms)[0m  [1m[35mCREATE DATABASE "todo_test" ENCODING = 'unicode'[0m
